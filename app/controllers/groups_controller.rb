@@ -22,6 +22,14 @@ class GroupsController < ApplicationController
       redirect_to groups_path, notice: "编辑成功"
   end
 
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    flash[:alert] = "删除完成"
+
+      redirect_to groups_path
+  end
+
   def show
     @group = Group.find(params[:id])
   end
