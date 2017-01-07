@@ -8,11 +8,22 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def show
+    @group = Group.find(params[:id])
+  end
+
+  def edit
+    @group = Group.find(params[:id])
+  end
+
   def create
     @group = Group.new(group_params)
-    @group.save
 
+    if @group.save
       redirect_to groups_path
+    else
+      render :new
+    end
   end
 
   def update
@@ -28,14 +39,6 @@ class GroupsController < ApplicationController
     flash[:alert] = "删除完成"
 
       redirect_to groups_path
-  end
-
-  def show
-    @group = Group.find(params[:id])
-  end
-
-  def edit
-    @group = Group.find(params[:id])
   end
 
 
